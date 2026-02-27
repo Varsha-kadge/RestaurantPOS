@@ -114,8 +114,8 @@ const handlePrintBill = () => {
   };
 
   return (
-    <div className="w-96 bg-white shadow-amber-50 p-6 flex flex-col justify-between">
-      <div>
+    <div className="w-96  bg-white shadow-amber-50 p-6 flex flex-col justify-between">
+      <div className="overflow-y-auto">
         <h2 className="text-xl font-semibold mb-4">
           Current Order
         </h2>
@@ -146,7 +146,7 @@ const handlePrintBill = () => {
       </div>
 
       {/* 🔥 TOTAL SECTION */}
-      <div className="border-t pt-4 space-y-2">
+      <div className="border-t pt-2 space-y-1">
         <div className="flex justify-between">
           <span>Subtotal</span>
           <span>₹{subtotal.toFixed(2)}</span>
@@ -166,7 +166,7 @@ const handlePrintBill = () => {
           <span>₹{grandTotal.toFixed(2)}</span>
         </div>
 
-        <button onClick={handlePrintBill} className="bg-green-500 text-white w-full py-3 rounded-lg mt-4">
+        <button onClick={handlePrintBill} className="bg-green-500 text-white w-full py-2 rounded-lg mt-2">
           Print Bill
         </button>
       </div>

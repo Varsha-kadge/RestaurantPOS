@@ -7,11 +7,11 @@ function ProductGrid({ products }) {
     //const filteredProducts =
     //selectedCategory === "All" ? products : products.filter((product) => product.category === selectedCategory);
   return (
-    <div className="flex-1 p-6 overflow-y-auto grid grid-cols-6 gap-4">
+    <div className="flex-1 p-4 overflow-y-auto grid grid-cols-6 gap-3">
       {products.map((product) => (
         <div
           key={product.id}
-              className="bg-white rounded-xl shadow hover:shadow-lg transition p-4 cursor-pointer"
+              className="bg-white rounded-xl shadow hover:shadow-lg transition p-2 cursor-pointer"
               onClick={() => addToCart(product)}
         >
           <img

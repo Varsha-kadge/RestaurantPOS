@@ -13,7 +13,7 @@ function Topbar({ onCatClick,searchTerm, setSearchTerm }) {
 
       <button
         onClick={() => onCatClick("All")}
-        className="bg-gray-500 text-white px-4 py-2 rounded-lg cursor-pointer"
+        className="bg-gray-500 text-white px-2 py-1 rounded-lg cursor-pointer"
       >
         All
       </button>
@@ -21,7 +21,7 @@ function Topbar({ onCatClick,searchTerm, setSearchTerm }) {
       {categories.map((cat) => (
         <button
           key={cat}
-          className="bg-orange-500 text-white px-2 py-2 rounded-lg cursor-pointer"
+          className="bg-orange-500 text-white px-2 py-1 rounded-lg cursor-pointer"
           onClick={() => onCatClick(cat)}
         >
           {cat}
