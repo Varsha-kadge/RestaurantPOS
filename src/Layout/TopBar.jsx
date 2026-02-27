@@ -2,7 +2,7 @@ import { categories } from "../data/categories";
 
 function Topbar({ onCatClick,searchTerm, setSearchTerm }) {
   return (
-    <div className="bg-white shadow-sm p-4 flex justify-between items-center flex-wrap gap-2">
+    <div className="bg-white shadow-sm p-4 flex justify-between items-center flex-wrap gap-1">
       <input
         type="text"
         placeholder="Search products..."
@@ -13,7 +13,7 @@ function Topbar({ onCatClick,searchTerm, setSearchTerm }) {
 
       <button
         onClick={() => onCatClick("All")}
-        className="bg-gray-500 text-white px-4 py-2 rounded-lg"
+        className="bg-gray-500 text-white px-4 py-2 rounded-lg cursor-pointer"
       >
         All
       </button>
@@ -21,7 +21,7 @@ function Topbar({ onCatClick,searchTerm, setSearchTerm }) {
       {categories.map((cat) => (
         <button
           key={cat}
-          className="bg-orange-500 text-white px-2 py-2 rounded-lg"
+          className="bg-orange-500 text-white px-2 py-2 rounded-lg cursor-pointer"
           onClick={() => onCatClick(cat)}
         >
           {cat}
