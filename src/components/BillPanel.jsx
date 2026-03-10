@@ -1,20 +1,36 @@
 import { useCart } from "../context/useCart";
 import { restaurantInfo } from "../data/restaurant";
 import { generateBillNumber } from "../Utils/billNumber";
+import { useEffect } from "react";
 function BillPanel() {
-   const { cart, clearCart, increaseQty, decreaseQty, updateQty } = useCart();
+  const { cart, clearCart, increaseQty, decreaseQty, updateQty } = useCart();
 
   const subtotal = cart.reduce(
     (acc, item) => acc + item.price * item.qty,
     0
   );
-const CGST = subtotal * 0.025;
-const SGST = subtotal * 0.025;
-const grandTotal = subtotal + CGST + SGST;
+  const CGST = subtotal * 0.025;
+  const SGST = subtotal * 0.025;
+  const grandTotal = subtotal + CGST + SGST;
   // const GST_RATE = 0.05; // 5%
   // const gstAmount = subtotal * GST_RATE;
   // const grandTotal = subtotal + gstAmount;
-const handlePrintBill = () => {
+  useEffect(() => {
+  const handleKeyDown = (event) => {
+    if (event.key === "F10") {
+      event.preventDefault(); // prevent browser menu
+      handlePrintBill();
+    }
+  };
+
+  window.addEventListener("keydown", handleKeyDown);
+
+  return () => {
+    window.removeEventListener("keydown", handleKeyDown);
+  };
+
+}, [cart]); 
+  const handlePrintBill = () => {
     if (cart.length === 0) return;
 
     const billNo = generateBillNumber();
@@ -42,69 +58,136 @@ const handlePrintBill = () => {
     const printWindow = window.open("", "", "width=400,height=600");
 
     printWindow.document.write(`
-      <html>
-        <head>
-          <title>Bill ${billNo}</title>
-          <style>
-            body { font-family: Arial; padding: 20px; }
-            h2, p { text-align: center; margin: 4px 0; }
-            table { width: 100%; margin-top: 10px; border-collapse: collapse; }
-            th, td { padding: 6px; text-align: left; }
-            .right { text-align: right; }
-            hr { margin: 10px 0; }
-          </style>
-        </head>
-        <body>
+<html>
+<head>
+<title>Bill ${billNo}</title>
 
-          <h2>${restaurantInfo.name}</h2>
-          <p>${restaurantInfo.address}</p>
-          <p>GSTIN: ${restaurantInfo.gstin}</p>
-          <hr/>
+<style>
 
-          <p>Bill No: ${billNo}</p>
-          <p>${dateTime}</p>
+@media print {
+  body{
+    width:78mm;
+    margin:0;
+  }
+}
 
-          <hr/>
+body{
+  font-family: monospace;
+  width:78mm;
+  padding:5px;
+  font-size:12px;
+}
 
-          <table>
-            <thead>
-              <tr>
-                <th>Item</th>
-                <th>Qty</th>
-                <th class="right">Price</th>
-                <th class="right">Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${cart
-                .map(
-                  (item) => `
-                <tr>
-                  <td>${item.name}</td>
-                  <td>${item.qty}</td>
-                  <td class="right">₹${item.price}</td>
-                  <td class="right">₹${
-                    item.price * item.qty
-                  }</td>
-                </tr>`
-                )
-                .join("")}
-            </tbody>
-          </table>
+.center{
+  text-align:center;
+}
 
-          <hr/>
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:5px;
+}
 
-          <p>Subtotal: ₹${subtotal.toFixed(2)}</p>
-          <p>CGST (2.5%): ₹${CGST.toFixed(2)}</p>
-          <p>SGST (2.5%): ₹${SGST.toFixed(2)}</p>
-          <h3>Total: ₹${grandTotal.toFixed(2)}</h3>
+th, td{
+  padding:2px 0;
+  font-size:12px;
+}
 
-          <hr/>
-          <p>Thank You! Visit Again 🙏</p>
+th{
+  border-bottom:1px dashed black;
+}
 
-        </body>
-      </html>
-    `);
+.right{
+  text-align:right;
+}
+
+.line{
+  border-top:1px dashed black;
+  margin:5px 0;
+}
+
+.total{
+  font-weight:bold;
+  font-size:14px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="center">
+  <strong>${restaurantInfo.name}</strong><br>
+  ${restaurantInfo.address}<br>
+  GSTIN: ${restaurantInfo.gstin}
+</div>
+
+<div class="line"></div>
+
+Bill No : ${billNo}<br>
+${dateTime}
+
+<div class="line"></div>
+
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th class="right">Qty</th>
+<th class="right">Price</th>
+<th class="right">Total</th>
+</tr>
+</thead>
+
+<tbody>
+${cart.map(item => `
+<tr>
+<td>${item.name}</td>
+<td class="right">${item.qty}</td>
+<td class="right">${item.price}</td>
+<td class="right">${(item.price * item.qty).toFixed(2)}</td>
+</tr>
+`).join("")}
+</tbody>
+</table>
+
+<div class="line"></div>
+
+<table>
+<tr>
+<td>Subtotal</td>
+<td class="right">₹${subtotal.toFixed(2)}</td>
+</tr>
+<tr>
+<td>CGST (2.5%)</td>
+<td class="right">₹${CGST.toFixed(2)}</td>
+</tr>
+<tr>
+<td>SGST (2.5%)</td>
+<td class="right">₹${SGST.toFixed(2)}</td>
+</tr>
+<tr class="total">
+<td>Total</td>
+<td class="right">₹${grandTotal.toFixed(2)}</td>
+</tr>
+</table>
+
+<div class="line"></div>
+
+<div class="center">
+Thank You! Visit Again 🙏
+</div>
+
+<script>
+window.onload = function(){
+  window.print();
+  window.close();
+}
+</script>
+
+</body>
+</html>
+`);
 
     printWindow.document.close();
     printWindow.print();
@@ -131,15 +214,15 @@ const handlePrintBill = () => {
             </div>
 
             <div className="flex items-center gap-2">
-              <button className="bg-gray-300 px-3 py-1" onClick={() =>decreaseQty(item.id)}>-</button>
+              <button className="bg-gray-300 px-3 py-1" onClick={() => decreaseQty(item.id)}>-</button>
               <input
-        type="number"
-        value={item.qty}
-        min="1"
-        onChange={(e) => updateQty(item.id, e.target.value)}
-        className="w-14 text-left px-1 border rounded"
-      />
-              <button className="bg-gray-300 px-3 py-1" onClick={() =>increaseQty(item.id)}>+</button>
+                type="number"
+                value={item.qty}
+                min="1"
+                onChange={(e) => updateQty(item.id, e.target.value)}
+                className="w-14 text-left px-1 border rounded"
+              />
+              <button className="bg-gray-300 px-3 py-1" onClick={() => increaseQty(item.id)}>+</button>
             </div>
           </div>
         ))}
