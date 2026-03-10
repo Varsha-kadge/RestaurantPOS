@@ -10,7 +10,7 @@ useEffect(() => {
   const fetchItems = async () => {
     try {
       const response = await fetch(
-        "http://localhost:6035/bo-pos/getItemData?storeId=2&categorieId=2"
+        "https://localhost:6035/bo-pos/getItemData?storeId=2&categorieId=2"
       );
 
       const data = await response.json();
