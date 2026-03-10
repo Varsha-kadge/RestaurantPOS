@@ -64,17 +64,16 @@ function BillPanel() {
 
 <style>
 
-@media print {
-  body{
-    width:78mm;
-    margin:0;
-  }
+@page{
+  size:78mm auto;
+  margin:0;
 }
 
 body{
-  font-family: monospace;
   width:78mm;
-  padding:5px;
+  margin:0;
+  padding:0;
+  font-family:monospace;
   font-size:12px;
 }
 
@@ -85,10 +84,9 @@ body{
 table{
   width:100%;
   border-collapse:collapse;
-  margin-top:5px;
 }
 
-th, td{
+th,td{
   padding:2px 0;
   font-size:12px;
 }
@@ -103,7 +101,7 @@ th{
 
 .line{
   border-top:1px dashed black;
-  margin:5px 0;
+  margin:4px 0;
 }
 
 .total{
@@ -117,14 +115,14 @@ th{
 <body>
 
 <div class="center">
-  <strong>${restaurantInfo.name}</strong><br>
-  ${restaurantInfo.address}<br>
-  GSTIN: ${restaurantInfo.gstin}
+<strong>${restaurantInfo.name}</strong><br/>
+${restaurantInfo.address}<br/>
+GSTIN: ${restaurantInfo.gstin}
 </div>
 
 <div class="line"></div>
 
-Bill No : ${billNo}<br>
+Bill No : ${billNo}<br/>
 ${dateTime}
 
 <div class="line"></div>
