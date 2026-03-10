@@ -1,8 +1,31 @@
 
 import { useCart } from "../context/useCart";
-//import { products } from "../data/products";
+import { useEffect, useState } from "react";
+
 
 function ProductGrid({ products }) {
+  const [items, setItems] = useState([]);
+
+useEffect(() => {
+  const fetchItems = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:6035/bo-pos/getItemData?storeId=2&categorieId=2"
+      );
+
+      const data = await response.json();
+
+      setItems(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  fetchItems();
+}, []);
+
+console.log(items,'items')
+//import { products } from "../data/products";
     const { addToCart } = useCart();
     //const filteredProducts =
     //selectedCategory === "All" ? products : products.filter((product) => product.category === selectedCategory);
