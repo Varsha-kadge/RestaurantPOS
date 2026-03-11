@@ -13,7 +13,7 @@ function App() {
     const fetchItems = async () => {
       try {
         const response = await fetch(
-          "http://localhost:6035/bo-pos/getItemData?storeId=2&categorieId=2"
+          "http://localhost:6035/bo-pos/getItemData?storeId=2&categorieId="+selectedCategory.categorieId
         );
   
         const data = await response.json();
