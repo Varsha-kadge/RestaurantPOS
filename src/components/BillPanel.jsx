@@ -140,7 +140,7 @@ ${dateTime}
 <tbody>
 ${cart.map(item => `
 <tr>
-<td>${item.name}</td>
+<td>${item.item}</td>
 <td class="right">${item.qty}</td>
 <td class="right">${item.price}</td>
 <td class="right">${(item.price * item.qty).toFixed(2)}</td>

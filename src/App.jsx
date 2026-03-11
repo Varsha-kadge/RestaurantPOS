@@ -25,20 +25,15 @@ function App() {
     };
   
     fetchItems();
-  }, []);
+  }, [selectedCategory]);
    const filteredProducts = products.filter((product) => {
-    const matchesCategory =
-      selectedCategory === "All" ||
-      product.categorieId === selectedCategory.categorieId;
-
-    const matchesSearch =
-      product.item.toLowerCase().includes(searchTerm.toLowerCase());
-
+    const matchesCategory = selectedCategory === "All" || product.categorieId === selectedCategory.categorieId;
+   const matchesSearch = product.item.toLowerCase().includes(searchTerm.toLowerCase());
     return matchesCategory && matchesSearch;
   });
   return (
     <div className="flex h-screen bg-gray-100">
-      <Sidebar />
+      <Sidebar/>
 
       <div className="flex-1 flex flex-col">
         <Topbar onCatClick={setSelectedCategory}
@@ -47,7 +42,7 @@ function App() {
 
         <div className="flex flex-1 overflow-hidden">
           <ProductGrid products={filteredProducts} />
-          <BillPanel />
+          <BillPanel/>
         </div>
       </div>
     </div>
