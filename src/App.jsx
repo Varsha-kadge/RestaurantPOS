@@ -13,17 +13,14 @@ function App() {
     const fetchItems = async () => {
       try {
         const response = await fetch(
-          "http://localhost:6035/bo-pos/getItemData?storeId=2&categorieId="+null
+          "http://localhost:6035/bo-pos/getItemData?storeId=2&categorieId="
         );
-  
         const data = await response.json();
-  
         setItems(data);
       } catch (error) {
         console.error(error);
       }
     };
-  
     fetchItems();
   }, [selectedCategory]);
    const filteredProducts = products.filter((product) => {
