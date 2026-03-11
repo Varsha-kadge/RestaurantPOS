@@ -1,4 +1,4 @@
-import { useEffect} from "react";
+import { useEffect, useState} from "react";
 
 function Topbar({ onCatClick, searchTerm, setSearchTerm }) {
   const [categories, setCategories] = useState([]);
