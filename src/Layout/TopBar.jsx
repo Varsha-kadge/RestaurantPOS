@@ -39,7 +39,7 @@ function Topbar({ onCatClick, searchTerm, setSearchTerm }) {
 
       {categories.map((cat) => (
         <button
-          key={cat}
+          key={cat.categorieId}
           className="bg-orange-500 text-white px-2 py-1 rounded-lg cursor-pointer"
           onClick={() => onCatClick(cat.categoriesName)}
         >
