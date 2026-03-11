@@ -7,12 +7,12 @@ function CartProvider({ children }) {
   const addToCart = (product) => {
     setCart((prev) => {
       const existing = prev.find(
-        (item) => item.id === product.id
+        (item) => item.itemId === product.itemId
       );
 
       if (existing) {
         return prev.map((item) =>
-          item.id === product.id ? { ...item, qty: item.qty + 1 } : item
+          item.itemId === product.itemId ? { ...item, qty: item.qty + 1 } : item
         );
       }
       return [...prev, { ...product, qty: 1 }];
@@ -21,7 +21,7 @@ function CartProvider({ children }) {
    const increaseQty = (id) => {
     setCart((prev) =>
       prev.map((item) =>
-        item.id === id
+        item.itemId === id
           ? { ...item, qty: item.qty + 1 }
           : item
       )
@@ -31,7 +31,7 @@ function CartProvider({ children }) {
     setCart((prev) =>
       prev
         .map((item) =>
-          item.id === id
+          item.itemId === id
             ? { ...item, qty: item.qty - 1 }
             : item
         )
@@ -43,7 +43,7 @@ function CartProvider({ children }) {
 
   setCart((prev) =>
     prev.map((item) =>
-      item.id === id
+      item.itemId === id
         ? { ...item, qty: Number(qty) }
         : item
     )

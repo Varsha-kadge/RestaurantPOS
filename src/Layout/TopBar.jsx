@@ -1,6 +1,25 @@
-import { categories } from "../data/categories";
+import { useEffect} from "react";
 
-function Topbar({ onCatClick,searchTerm, setSearchTerm }) {
+function Topbar({ onCatClick, searchTerm, setSearchTerm }) {
+  const [categories, setCategories] = useState([]);
+  
+  useEffect(() => {
+  const fetchItems = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:6035/bo-pos/getCategoryData?storeId=2"
+      );
+
+      const data = await response.json();
+
+      setCategories(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  fetchItems();
+}, []);
   return (
     <div className="bg-white shadow-sm p-4 flex justify-between items-center flex-wrap gap-1">
       <input
@@ -22,9 +41,9 @@ function Topbar({ onCatClick,searchTerm, setSearchTerm }) {
         <button
           key={cat}
           className="bg-orange-500 text-white px-2 py-1 rounded-lg cursor-pointer"
-          onClick={() => onCatClick(cat)}
+          onClick={() => onCatClick(cat.categoriesName)}
         >
-          {cat}
+          {cat.categoriesName}
         </button>
       ))}
     </div>

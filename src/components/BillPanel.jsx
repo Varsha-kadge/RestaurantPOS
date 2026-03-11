@@ -207,12 +207,12 @@ window.onload = function(){
             className="flex justify-between items-center mb-4"
           >
             <div>
-              <p className="font-medium">{item.name}</p>
+              <p className="font-medium">{item.item}</p>
               <p className="text-gray-500">₹{item.price}</p>
             </div>
 
             <div className="flex items-center gap-2">
-              <button className="bg-gray-300 px-3 py-1" onClick={() => decreaseQty(item.id)}>-</button>
+              <button className="bg-gray-300 px-3 py-1" onClick={() => decreaseQty(item.itemId)}>-</button>
               <input
                 type="number"
                 value={item.qty}
@@ -220,7 +220,7 @@ window.onload = function(){
                 onChange={(e) => updateQty(item.id, e.target.value)}
                 className="w-14 text-left px-1 border rounded"
               />
-              <button className="bg-gray-300 px-3 py-1" onClick={() => increaseQty(item.id)}>+</button>
+              <button className="bg-gray-300 px-3 py-1" onClick={() => increaseQty(item.itemId)}>+</button>
             </div>
           </div>
         ))}
