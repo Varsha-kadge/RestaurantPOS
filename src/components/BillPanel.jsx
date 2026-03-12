@@ -1,7 +1,7 @@
 import { useCart } from "../context/useCart";
 import { generateBillNumber } from "../Utils/billNumber";
 import { useEffect } from "react";
-function BillPanel(restaurantInfo) {
+function BillPanel({restaurantInfo}) {
   const { cart, clearCart, increaseQty, decreaseQty, updateQty } = useCart();
 
   const subtotal = cart.reduce(
