@@ -6,12 +6,17 @@ function BillPanel() {
   const { cart, clearCart, increaseQty, decreaseQty, updateQty } = useCart();
 
   const subtotal = cart.reduce(
-    (acc, item) => acc + item.price * item.qty,
-    0
-  );
-  const CGST = subtotal * 0.025;
-  const SGST = subtotal * 0.025;
-  const grandTotal = subtotal + CGST + SGST;
+  (acc, item) => acc + item.price * item.qty,
+  0
+);
+// subtotal only for GST applicable items
+const gstSubtotal = cart.reduce(
+  (acc, item) => item.gst ? acc + item.price * item.qty : acc,
+  0
+);
+const CGST = gstSubtotal * 0.025;
+const SGST = gstSubtotal * 0.025;
+const grandTotal = subtotal + CGST + SGST;
   // const GST_RATE = 0.05; // 5%
   // const gstAmount = subtotal * GST_RATE;
   // const grandTotal = subtotal + gstAmount;
