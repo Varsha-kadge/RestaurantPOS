@@ -119,10 +119,10 @@ th{
 <body>
 
 <div class="center">
-<strong>${restaurantInfo.storeName}</strong><br/>
-${restaurantInfo.storeAddress}<br/>
-GSTIN: ${restaurantInfo.gstin}<br/>
-Contact: ${restaurantInfo.mobileNo}
+<strong>${restaurantInfo[0].storeName}</strong><br/>
+${restaurantInfo[0].storeAddress}<br/>
+GSTIN: ${restaurantInfo[0].gstin}<br/>
+Contact: ${restaurantInfo[0].mobileNo}
 </div>
 
 <div class="line"></div>
