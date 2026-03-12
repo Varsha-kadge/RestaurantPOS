@@ -9,6 +9,8 @@ function App() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
   const [products, setItems] = useState([]);
+  const [restoInfo, setRestoInfo] = useState([]);
+
   useEffect(() => {
     const fetchItems = async () => {
       try {
@@ -21,7 +23,19 @@ function App() {
         console.error(error);
       }
     };
+    const fetchRestoInfo = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:6035/bo-pos/getRestaurantData?storeId=2"
+        );
+        const data = await response.json();
+        setRestoInfo(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
     fetchItems();
+    fetchRestoInfo();
   }, [selectedCategory]);
    const filteredProducts = products.filter((product) => {
     const matchesCategory = selectedCategory === "All" || product.categorieId === selectedCategory.categorieId;
@@ -39,7 +53,7 @@ function App() {
 
         <div className="flex flex-1 overflow-hidden">
           <ProductGrid products={filteredProducts} />
-          <BillPanel/>
+          <BillPanel restaurantInfo={restoInfo}/>
         </div>
       </div>
     </div>
