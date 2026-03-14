@@ -69,20 +69,24 @@ const grandTotal = subtotal + CGST + SGST;
 <style>
 
 @page{
-  size:78mm auto;
+  size:72mm auto;
   margin:0;
 }
 
 body{
-  width:78mm;
+  width:72mm;
   margin:0;
-  padding:0;
-  font-family:monospace;
-  font-size:12px;
+  padding:4px;
+  font-family: monospace;
+  font-size:11px;
 }
 
 .center{
   text-align:center;
+}
+
+.right{
+  text-align:right;
 }
 
 table{
@@ -90,27 +94,43 @@ table{
   border-collapse:collapse;
 }
 
-th,td{
+th, td{
   padding:2px 0;
-  font-size:12px;
+  font-size:11px;
 }
 
 th{
-  border-bottom:1px dashed black;
-}
-
-.right{
-  text-align:right;
+  border-bottom:1px dashed #000;
 }
 
 .line{
-  border-top:1px dashed black;
+  border-top:1px dashed #000;
   margin:4px 0;
 }
 
 .total{
   font-weight:bold;
-  font-size:14px;
+  font-size:13px;
+}
+
+.item{
+  width:50%;
+}
+
+.qty{
+  width:15%;
+}
+
+.price{
+  width:15%;
+}
+
+.amount{
+  width:20%;
+}
+
+.small{
+  font-size:10px;
 }
 
 </style>
@@ -119,36 +139,44 @@ th{
 <body>
 
 <div class="center">
-<strong>${restaurantInfo[0].storeName}</strong><br/>
-${restaurantInfo[0].storeAddress}<br/>
-GSTIN: ${restaurantInfo[0].gstin}<br/>
+<strong>${restaurantInfo[0].storeName}</strong><br>
+<span class="small">${restaurantInfo[0].storeAddress}</span><br>
+GSTIN: ${restaurantInfo[0].gstin}<br>
 Contact: ${restaurantInfo[0].mobileNo}
 </div>
 
 <div class="line"></div>
 
-Bill No : ${billNo}<br/>
-${dateTime}
+<table>
+<tr>
+<td>Bill No</td>
+<td class="right">${billNo}</td>
+</tr>
+<tr>
+<td>Date</td>
+<td class="right">${dateTime}</td>
+</tr>
+</table>
 
 <div class="line"></div>
 
 <table>
 <thead>
 <tr>
-<th>Item</th>
-<th class="right">Qty</th>
-<th class="right">Price</th>
-<th class="right">Total</th>
+<th class="item">Item</th>
+<th class="qty right">Qty</th>
+<th class="price right">Price</th>
+<th class="amount right">Total</th>
 </tr>
 </thead>
 
 <tbody>
 ${cart.map(item => `
 <tr>
-<td>${item.item}</td>
-<td class="right">${item.qty}</td>
-<td class="right">${item.price}</td>
-<td class="right">${(item.price * item.qty).toFixed(2)}</td>
+<td class="item">${item.item}</td>
+<td class="qty right">${item.qty}</td>
+<td class="price right">${item.price}</td>
+<td class="amount right">${(item.qty * item.price).toFixed(2)}</td>
 </tr>
 `).join("")}
 </tbody>
