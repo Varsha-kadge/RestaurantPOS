@@ -13,6 +13,11 @@ const gstSubtotal = cart.reduce(
   (acc, item) => item.gst ? acc + item.price * item.qty : acc,
   0
 );
+const totalItems = cart.length;
+
+const totalQty = cart.reduce((sum, item) => {
+  return sum + item.qty;
+}, 0);
 const CGST = gstSubtotal * 0.025;
 const SGST = gstSubtotal * 0.025;
 const grandTotal = subtotal + CGST + SGST;
@@ -183,6 +188,18 @@ ${cart.map(item => `
 </table>
 
 <div class="line"></div>
+<div class="line"></div>
+
+<table>
+<tr>
+<td>Total Items</td>
+<td class="right">${totalItems}</td>
+</tr>
+<tr>
+<td>Total Qty</td>
+<td class="right">${totalQty}</td>
+</tr>
+</table>
 
 <table>
 <tr>
