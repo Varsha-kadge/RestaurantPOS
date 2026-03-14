@@ -188,18 +188,20 @@ ${cart.map(item => `
 </table>
 
 <div class="line"></div>
-<div class="line"></div>
 
 <table>
 <tr>
-<td>Total Items</td>
-<td class="right">${totalItems}</td>
+<td>Total Items (${totalItems})</td>
 </tr>
 <tr>
 <td>Total Qty</td>
+<td class="right"></td>
+<td class="right"></td>
 <td class="right">${totalQty}</td>
 </tr>
 </table>
+
+<div class="line"></div>
 
 <table>
 <tr>
