@@ -83,7 +83,7 @@ body{
   margin:0;
   padding:4px;
   font-family: monospace;
-  font-size:11px;
+  font-size:12px;
 }
 
 .center{
@@ -96,6 +96,7 @@ body{
 
 table{
   width:100%;
+  margin-left:2px;
   border-collapse:collapse;
 }
 
@@ -144,7 +145,7 @@ th{
 <body>
 
 <div class="center">
-<strong>${restaurantInfo[0].storeName}</strong><br>
+<strong>${restaurantInfo[0].storeName.toUpperCase()}</strong><br>
 <span class="small">${restaurantInfo[0].storeAddress}</span><br>
 GSTIN: ${restaurantInfo[0].gstin}<br>
 Contact: ${restaurantInfo[0].mobileNo}
@@ -194,10 +195,7 @@ ${cart.map(item => `
 <td>Total Items (${totalItems})</td>
 </tr>
 <tr>
-<td>Total Qty</td>
-<td class="right"></td>
-<td class="right"></td>
-<td>${totalQty}</td>
+<td>Total Qty (${totalQty})</td>
 </tr>
 </table>
 
