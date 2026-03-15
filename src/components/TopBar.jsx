@@ -7,7 +7,12 @@ export default function Topbar({ onCatClick, searchTerm, setSearchTerm }) {
   const fetchItems = async () => {
     try {
       const response = await fetch(
-        "https://bryce-unseducible-zaida.ngrok-free.dev/bo-pos/getCategoryData?storeId=2"
+        "https://bryce-unseducible-zaida.ngrok-free.dev/bo-pos/getCategoryData?storeId=2",
+        {
+      headers: {
+        "ngrok-skip-browser-warning": "true",
+      },
+    }
       );
       const data = await response.json();
 
