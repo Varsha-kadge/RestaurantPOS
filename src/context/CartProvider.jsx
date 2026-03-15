@@ -9,13 +9,13 @@ function CartProvider({ children }) {
       const existing = prev.find(
         (item) => item.itemId === product.itemId
       );
-
+     const qtyToAdd = product.qty ? Number(product.qty) : 1;
       if (existing) {
         return prev.map((item) =>
           item.itemId === product.itemId ? { ...item, qty: item.qty + 1 } : item
         );
       }
-      return [...prev, { ...product, qty: 1 }];
+      return [...prev, { ...product, qty: qtyToAdd }];
     });
   };
    const increaseQty = (id) => {

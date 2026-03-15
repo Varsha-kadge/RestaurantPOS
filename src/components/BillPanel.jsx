@@ -197,7 +197,7 @@ ${cart.map(item => `
 <td>Total Qty</td>
 <td class="right"></td>
 <td class="right"></td>
-<td class="right">${totalQty}</td>
+<td>${totalQty}</td>
 </tr>
 </table>
 
@@ -247,7 +247,7 @@ window.onload = function(){
   };
 
   return (
-    <div className="w-96  bg-white shadow-amber-50 p-6 flex flex-col justify-between">
+    <div className="w-96 h-full  bg-white shadow-amber-50 p-6 flex flex-col">
       <div className="overflow-y-auto">
         <h2 className="text-xl font-semibold mb-4">
           Current Order

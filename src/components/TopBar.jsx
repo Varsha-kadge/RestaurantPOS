@@ -1,15 +1,14 @@
 import { useEffect, useState} from "react";
 
-function Topbar({ onCatClick, searchTerm, setSearchTerm }) {
+export default function Topbar({ onCatClick, searchTerm, setSearchTerm }) {
   const [categories, setCategories] = useState([]);
   
   useEffect(() => {
   const fetchItems = async () => {
     try {
       const response = await fetch(
-        "http://localhost:6035/bo-pos/getCategoryData?storeId=2"
+        "https://bryce-unseducible-zaida.ngrok-free.dev/bo-pos/getCategoryData?storeId=2"
       );
-
       const data = await response.json();
 
       setCategories(data);
@@ -50,4 +49,4 @@ function Topbar({ onCatClick, searchTerm, setSearchTerm }) {
   );
 }
 
-export default Topbar;
+//export default Topbar;
