@@ -10,7 +10,7 @@ function ProductGrid({ products }) {
     console.log(products,'products')
   if (products.length !== 0) {
     return (
-    <div className="flex-1 p-4 overflow-y-auto grid grid-cols-6 gap-3">
+    <div className="flex-1 p-4 overflow-y-auto m-3 grid grid-cols-6 gap-3">
       
       {products.map((product) => (
       <div
@@ -31,7 +31,7 @@ function ProductGrid({ products }) {
   );
   } else {
     return (
-      <div className="flex-1 p-4 overflow-y-auto grid grid-cols-7 mt-2 mr-3 gap-3 bg-white">
+      <div className="flex-1 p-4 overflow-y-auto grid grid-cols-7 m-3 gap-3 bg-white">
             <h1>No Data Found</h1>
       </div>
     )
