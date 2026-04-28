@@ -3,18 +3,22 @@ import { Routes, Route } from "react-router-dom";
 import BillingPage from "./pages/BillingPage";
 import SearchPanel from "./pages/SearchPanel"
 import Layout from "./pages/Layout"
+import LoginPage from "./pages/Login"
 
 function App() {
-    const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
   const [products, setItems] = useState([]);
   const [restoInfo, setRestoInfo] = useState([]);
+const [selectedStoreID, setSlectedStoreID] = useState(null);
+
 
   useEffect(() => {
     const fetchItems = async () => {
+      if(selectedStoreID){
     try {
       const response = await fetch(
-        "https://bryce-unseducible-zaida.ngrok-free.dev/bo-pos/getItemData?storeId=2&categorieId=2",
+        "https://bryce-unseducible-zaida.ngrok-free.dev/bo-pos/getItemData?storeId="+selectedStoreID+"&categorieId=2",
         {
       headers: {
         "ngrok-skip-browser-warning": "true",
@@ -26,11 +30,13 @@ function App() {
     } catch (error) {
       console.error("Error:", error);
     }
+  }
   };
     const fetchRestoInfo = async () => {
+      if(selectedStoreID){
       try {
         const response = await fetch(
-          "https://bryce-unseducible-zaida.ngrok-free.dev/bo-pos/getRestaurantData?storeId=2",
+          "https://bryce-unseducible-zaida.ngrok-free.dev/bo-pos/getRestaurantData?storeId="+selectedStoreID,
           {
       headers: {
         "ngrok-skip-browser-warning": "true",
@@ -42,6 +48,7 @@ function App() {
       } catch (error) {
         console.error(error);
       }
+    }
     };
     fetchItems();
     fetchRestoInfo();
@@ -53,37 +60,47 @@ function App() {
   });
  
   return (
-    <Routes>
-  <Route
-    path="/"
-    element={
-      <Layout
-        setSelectedCategory={setSelectedCategory}
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
+   <Routes>
+  {/* If no store selected → Login */}
+  {!selectedStoreID ? (
+    <Route
+      path="*"
+      element={<LoginPage setSlectedStoreID={setSlectedStoreID} />}
+    />
+  ) : (
+    <Route
+      path="/"
+      element={
+        <Layout
+          setSelectedCategory={setSelectedCategory}
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          selectedStoreID={selectedStoreID}
+          setSlectedStoreID={setSlectedStoreID}
+        />
+      }
+    >
+      <Route
+        index
+        element={
+          <BillingPage
+            filteredProducts={filteredProducts}
+            restoInfo={restoInfo}
+          />
+        }
       />
-    }
-  >
-    <Route
-      index
-      element={
-        <BillingPage
-          filteredProducts={filteredProducts}
-          restoInfo={restoInfo}
-        />
-      }
-    />
 
-    <Route
-      path="add-item"
-      element={
-        <SearchPanel
-          menuItems={products}
-          restoInfo={restoInfo}
-        />
-      }
-    />
-  </Route>
+      <Route
+        path="add-item"
+        element={
+          <SearchPanel
+            menuItems={products}
+            restoInfo={restoInfo}
+          />
+        }
+      />
+    </Route>
+  )}
 </Routes>
   )
 }

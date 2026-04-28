@@ -4,7 +4,9 @@ import Sidebar from "../components/Sidebar";
 export default function Layout({
   setSelectedCategory,
   searchTerm,
-  setSearchTerm
+  setSearchTerm,
+  selectedStoreID,
+  setSlectedStoreID
 }) {
   return (
     <div className="flex h-screen bg-gray-100">
@@ -18,6 +20,8 @@ export default function Layout({
           onCatClick={setSelectedCategory}
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
+          selectedStoreID={selectedStoreID}
+          setSlectedStoreID={setSlectedStoreID}
         />
 
         {/* Page Content */}

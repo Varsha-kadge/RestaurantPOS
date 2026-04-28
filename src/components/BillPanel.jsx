@@ -243,9 +243,8 @@ window.onload = function(){
     // 🔥 Optional: clear cart after printing
     clearCart();
   };
-
   return (
-    <div className="w-96 h-full  bg-white shadow-amber-50 p-6 flex flex-col">
+    <div className="w-96 h-full mt-2  bg-white shadow-amber-50 p-6 flex flex-col">
       <div className="overflow-y-auto">
         <h2 className="text-xl font-semibold mb-4">
           Current Order

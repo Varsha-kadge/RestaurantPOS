@@ -1,13 +1,13 @@
 import { useEffect, useState} from "react";
 
-export default function Topbar({ onCatClick, searchTerm, setSearchTerm }) {
+export default function Topbar({ onCatClick, searchTerm, setSearchTerm,selectedStoreID,setSlectedStoreID}) {
   const [categories, setCategories] = useState([]);
   
   useEffect(() => {
   const fetchItems = async () => {
     try {
       const response = await fetch(
-        "https://bryce-unseducible-zaida.ngrok-free.dev/bo-pos/getCategoryData?storeId=2",
+        "https://bryce-unseducible-zaida.ngrok-free.dev/bo-pos/getCategoryData?storeId="+selectedStoreID,
         {
       headers: {
         "ngrok-skip-browser-warning": "true",
@@ -24,6 +24,9 @@ export default function Topbar({ onCatClick, searchTerm, setSearchTerm }) {
 
   fetchItems();
 }, []);
+const handleLogout = () => {
+    setSlectedStoreID(null); // 🔥 this logs out
+  };
   return (
     <div className="bg-white shadow-sm p-4 flex justify-between items-center flex-wrap gap-1">
       <input
@@ -50,6 +53,11 @@ export default function Topbar({ onCatClick, searchTerm, setSearchTerm }) {
           {cat.categoriesName}
         </button>
       ))}
+       <button
+        onClick={handleLogout}
+        className="bg-gray-500 text-white px-2 py-1 rounded-lg cursor-pointer"
+      >
+        LOGOUT ➡️ </button>
     </div>
   );
 }

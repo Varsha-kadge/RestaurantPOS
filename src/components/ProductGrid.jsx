@@ -7,10 +7,13 @@ function ProductGrid({ products }) {
     const { addToCart } = useCart();
     //const filteredProducts =
     //selectedCategory === "All" ? products : products.filter((product) => product.category === selectedCategory);
-  return (
+    console.log(products,'products')
+  if (products.length !== 0) {
+    return (
     <div className="flex-1 p-4 overflow-y-auto grid grid-cols-6 gap-3">
+      
       {products.map((product) => (
-        <div
+      <div
           key={product.itemId}
               className="bg-white rounded-xl shadow hover:shadow-lg transition p-2 cursor-pointer"
               onClick={() => addToCart(product)}
@@ -26,6 +29,14 @@ function ProductGrid({ products }) {
       ))}
     </div>
   );
+  } else {
+    return (
+      <div className="flex-1 p-4 overflow-y-auto grid grid-cols-7 mt-2 mr-3 gap-3 bg-white">
+            <h1>No Data Found</h1>
+      </div>
+    )
+  }
+    
 }
 
 export default ProductGrid;
