@@ -10,11 +10,16 @@ function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [products, setItems] = useState([]);
   const [restoInfo, setRestoInfo] = useState([]);
-const [selectedStoreID, setSlectedStoreID] = useState(null);
+const [selectedStoreID, setSlectedStoreID] = useState("");
 
 
+const handleChildData = (data) => {
+    setSlectedStoreID(data); // 👈 receive data from child
+    console.log(selectedStoreID,'selectedStoreID22')
+  };
   useEffect(() => {
     const fetchItems = async () => {
+      console.log(selectedStoreID,'selectedStoreID')
       if(selectedStoreID){
     try {
       const response = await fetch(
@@ -30,7 +35,7 @@ const [selectedStoreID, setSlectedStoreID] = useState(null);
     } catch (error) {
       console.error("Error:", error);
     }
-  }
+      }
   };
     const fetchRestoInfo = async () => {
       if(selectedStoreID){
@@ -52,7 +57,7 @@ const [selectedStoreID, setSlectedStoreID] = useState(null);
     };
     fetchItems();
     fetchRestoInfo();
-  }, [selectedCategory]);
+  }, [selectedStoreID]);
    const filteredProducts = products.filter((product) => {
     const matchesCategory = selectedCategory === "All" || product.categorieId === selectedCategory.categorieId;
    const matchesSearch = product.item.toLowerCase().includes(searchTerm.toLowerCase());
@@ -65,7 +70,7 @@ const [selectedStoreID, setSlectedStoreID] = useState(null);
   {!selectedStoreID ? (
     <Route
       path="*"
-      element={<LoginPage setSlectedStoreID={setSlectedStoreID} />}
+      element={<LoginPage sendData={handleChildData}/>}
     />
   ) : (
     <Route

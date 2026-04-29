@@ -1,23 +1,38 @@
 import { useState } from "react";
-export default function Login({ setSlectedStoreID }) {
+import logo from '../assets/logo.jpeg'
+
+export default function Login({ sendData }) {
     const [selectedID, setSlectedID] = useState(null);
     const handleLogin = () => {
   if (selectedID) {
-      setSlectedStoreID(selectedID); // 🔥 send data to App.js
+      sendData(selectedID); // 🔥 send data to App.js
     }
 };
    return (
-    <div className="w-96 h-full  bg-white shadow-amber-50 p-6 flex flex-col">
-<h3>Select a store:</h3>
-      <select value={selectedID} onChange={(e) => setSlectedID(e.target.value)}>
-        <option value="">-- Choose --</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
+   <div className="flex flex-col justify-center items-center h-screen bg-white p-6">
+  <div className="shadow-md rounded-lg p-6 bg-white w-80 text-center">
+    <img src={logo} alt="logo" className="items-center w-70 h-50 mb-2"  />
+    <h3 className="text-lg font-semibold mb-4">Select a store:</h3>
 
-      </select>
-     <button onClick={handleLogin} className="bg-gray-500 text-white px-2 py-1 rounded-lg cursor-pointer">Login</button>
-      {/* {selected && <p>You selected: {selected}</p>} */}
-    </div>
+    <select
+      className="border w-full mb-4 mt-1 p-2 rounded"
+      value={selectedID}
+      onChange={(e) => setSlectedID(e.target.value)}
+    >
+      <option value="">-- Choose --</option>
+      <option value="1">Store 1</option>
+      <option value="2">Store 2</option>
+    </select>
+
+    <button
+      onClick={handleLogin}
+      className="bg-green-600 text-white px-4 py-2 rounded-lg w-full hover:bg-green-700 transition"
+    >
+      Login
+    </button>
+
+  </div>
+</div>
   );
 }
 

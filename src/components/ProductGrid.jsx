@@ -7,7 +7,6 @@ function ProductGrid({ products }) {
     const { addToCart } = useCart();
     //const filteredProducts =
     //selectedCategory === "All" ? products : products.filter((product) => product.category === selectedCategory);
-    console.log(products,'products')
   if (products.length !== 0) {
     return (
     <div className="flex-1 p-4 overflow-y-auto m-3 grid grid-cols-6 gap-3">

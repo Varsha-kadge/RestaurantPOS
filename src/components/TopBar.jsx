@@ -1,4 +1,5 @@
 import { useEffect, useState} from "react";
+import logo from '../assets/logo.jpeg'
 
 export default function Topbar({ onCatClick, searchTerm, setSearchTerm,selectedStoreID,setSlectedStoreID}) {
   const [categories, setCategories] = useState([]);
@@ -29,6 +30,7 @@ const handleLogout = () => {
   };
   return (
     <div className="bg-white shadow-sm p-4 flex justify-between items-center flex-wrap gap-1">
+    <img src={logo} alt="logo" style={{ width: "70px", height: "50px" }} />
       <input
         type="text"
         placeholder="Search products..."
