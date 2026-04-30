@@ -83,7 +83,7 @@ body{
   margin:0;
   padding:4px;
   font-family: monospace;
-  font-size:12px;
+  font-size:14px;
 }
 
 .center{
@@ -102,7 +102,7 @@ table{
 
 th, td{
   padding:2px 0;
-  font-size:11px;
+  font-size:13px;
 }
 
 th{
@@ -116,7 +116,7 @@ th{
 
 .total{
   font-weight:bold;
-  font-size:13px;
+  font-size:15px;
 }
 
 .item{
@@ -136,7 +136,7 @@ th{
 }
 
 .small{
-  font-size:10px;
+  font-size:12px;
 }
 
 </style>
