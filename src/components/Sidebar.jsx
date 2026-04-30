@@ -18,7 +18,7 @@ export default function Sidebar(){
         className="p-3 hover:bg-gray-700"
         onClick={() => navigate("/add-item")}
       >
-        📋 Add Item
+        📋 Counter Billing
       </button>
     </div>
   );
