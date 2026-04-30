@@ -138,7 +138,9 @@ th{
 .small{
   font-size:12px;
 }
-
+strong{
+font-size:18px;
+}
 </style>
 </head>
 
@@ -265,7 +267,7 @@ window.onload = function(){
               <input
                 type="number"
                 value={item.qty}
-                min="1"
+                min="0"
                 onChange={(e) => updateQty(item.id, e.target.value)}
                 className="w-14 text-left px-1 border rounded"
               />
