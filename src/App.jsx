@@ -23,7 +23,7 @@ const handleChildData = (data) => {
       if(selectedStoreID){
     try {
       const response = await fetch(
-        "https://bryce-unseducible-zaida.ngrok-free.dev/bo-pos/getItemData?storeId="+selectedStoreID+"&categorieId=2",
+        "https://bryce-unseducible-zaida.ngrok-free.dev/bo-pos/getItemData?storeId="+selectedStoreID,
         {
       headers: {
         "ngrok-skip-browser-warning": "true",
