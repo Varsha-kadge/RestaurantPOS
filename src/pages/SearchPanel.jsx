@@ -1,5 +1,4 @@
 import { useState } from "react";
-import BillPanel from "../components/BillPanel";
 import { useCart } from "../context/useCart";
 
 export default function AddItem({ menuItems, restoInfo }) {
@@ -33,59 +32,52 @@ export default function AddItem({ menuItems, restoInfo }) {
   };
 
   return (
-    <div className="flex flex-1 overflow-hidden">
-         
-   <div className="w-full max-w-xl mx-auto p-4">
+    <div className="w-80 relative">
 
   <input
     type="text"
     placeholder="Search item..."
     value={search}
     onChange={(e) => setSearch(e.target.value)}
-    className="w-full border border-gray-300 rounded-lg px-4 py-2 
-               focus:outline-none focus:ring-2 focus:ring-blue-500"
+    className="border rounded-lg px-4 py-2 w-full"
   />
 
   {search && (
-    <div className="mt-2 bg-white border border-gray-200 rounded-lg shadow-md max-h-64 overflow-y-auto">
+    <div className="absolute top-full left-0 w-full bg-white border border-gray-200 rounded-lg shadow-lg max-h-64 overflow-y-auto z-50">
 
       {filteredItems.map((item) => (
         <div
           key={item.itemId}
-          className="flex items-center justify-between p-3 border-b hover:bg-gray-50"
+          className="flex items-center justify-between p-2 hover:bg-gray-50"
         >
-
-          <span className="text-gray-800 font-medium">
-            {item.item}
-          </span>
+          <span>{item.item}</span>
 
           <input
             type="number"
             min="1"
             placeholder="1"
-            value={qty[item.itemId]}
-            onChange={(e) =>
-              handleQtyChange(item.itemId, e.target.value)
-            }
-            className="w-16 border border-gray-300 rounded-md px-2 py-1 text-center"
+            value={qty[item.itemId] || ""}
+            onChange={(e) =>handleQtyChange(item.itemId, e.target.value)}
+             onKeyDown={(e) => {
+    if (e.key === "Enter") {
+      e.preventDefault(); // important for number input
+      handleQtyChange(item.itemId, e.target.value)
+    }
+  }}
+            className="w-12 border rounded text-center"
           />
 
           <button
             onClick={() => handleAdd(item)}
-            className="bg-green-500 text-white px-3 py-1 rounded-md 
-                       hover:bg-green-600 transition"
+            className="bg-green-500 text-white px-2 py-1 rounded"
           >
             Add
           </button>
-
         </div>
       ))}
 
     </div>
   )}
-
 </div>
- <BillPanel restaurantInfo={restoInfo} />
-        </div>
   );
 }

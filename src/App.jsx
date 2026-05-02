@@ -82,6 +82,8 @@ const handleChildData = (data) => {
           setSearchTerm={setSearchTerm}
           selectedStoreID={selectedStoreID}
           setSlectedStoreID={setSlectedStoreID}
+          menuItems={products}
+          restoInfo={restoInfo}
         />
       }
     >
@@ -97,12 +99,6 @@ const handleChildData = (data) => {
 
       <Route
         path="add-item"
-        element={
-          <SearchPanel
-            menuItems={products}
-            restoInfo={restoInfo}
-          />
-        }
       />
     </Route>
   )}

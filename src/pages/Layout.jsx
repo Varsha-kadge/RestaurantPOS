@@ -6,7 +6,9 @@ export default function Layout({
   searchTerm,
   setSearchTerm,
   selectedStoreID,
-  setSlectedStoreID
+  setSlectedStoreID,
+  menuItems,
+  restoInfo
 }) {
   return (
     <div className="flex h-screen bg-gray-100">
@@ -22,6 +24,8 @@ export default function Layout({
           setSearchTerm={setSearchTerm}
           selectedStoreID={selectedStoreID}
           setSlectedStoreID={setSlectedStoreID}
+          products={menuItems}
+          restoInfo={restoInfo}
         />
 
         {/* Page Content */}
