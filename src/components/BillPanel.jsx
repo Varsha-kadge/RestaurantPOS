@@ -2,8 +2,7 @@ import { useCart } from "../context/useCart";
 import { generateBillNumber } from "../Utils/billNumber";
 import { useEffect } from "react";
 function BillPanel({restaurantInfo}) {
-  const { cart, clearCart, increaseQty, decreaseQty, updateQty } = useCart();
-
+  const { cart, clearCart, increaseQty, decreaseQty, updateQty, updatePrice,removeItem } = useCart();
   const subtotal = cart.reduce(
   (acc, item) => acc + item.price * item.qty,
   0
@@ -245,65 +244,106 @@ window.onload = function(){
     // 🔥 Optional: clear cart after printing
     clearCart();
   };
-  return (
-    <div className="w-96 h-full mt-2  bg-white shadow-amber-50 p-6 flex flex-col">
-      <div className="overflow-y-auto">
-        <h2 className="text-xl font-semibold mb-4">
-          Current Order
-        </h2>
+ return (
+  <div className="w-96 h-full mt-2 bg-white p-4 flex flex-col">
+    <div className="overflow-y-auto">
+      <h2 className="text-xl font-semibold mb-4">
+        Current Order
+      </h2>
 
-        {cart.map((item) => (
-          <div
-            key={item.id}
-            className="flex justify-between items-center mb-4"
-          >
-            <div>
-              <p className="font-medium">{item.item}</p>
-              <p className="text-gray-500">₹{item.price}</p>
-            </div>
+      {cart.map((item) => (
+        <div
+          key={item.itemId}
+          className="flex items-center justify-between mb-3"
+        >
+          {/* Item Name */}
+          <p className="w-24 truncate">{item.item}</p>
 
-            <div className="flex items-center gap-2">
-              <button className="bg-gray-300 px-3 py-1" onClick={() => decreaseQty(item.itemId)}>-</button>
-              <input
-                type="number"
-                value={item.qty}
-                min="0"
-                onChange={(e) => updateQty(item.id, e.target.value)}
-                className="w-14 text-left px-1 border rounded"
-              />
-              <button className="bg-gray-300 px-3 py-1" onClick={() => increaseQty(item.itemId)}>+</button>
-            </div>
+          {/* Price */}
+          <div className="flex items-center gap-1">
+            <span className="text-sm">₹</span>
+            <input
+              type="number" 
+              value={item.price}
+              step="0.5"
+              min="0"
+              onChange={(e) =>
+                updatePrice(item.itemId, e.target.value)
+              }
+              className="w-16 px-1 border rounded appearance-none"
+            />
           </div>
-        ))}
-      </div>
 
-      {/* 🔥 TOTAL SECTION */}
-      <div className="border-t pt-2 space-y-1">
-        <div className="flex justify-between">
-          <span>Subtotal</span>
-          <span>₹{subtotal.toFixed(2)}</span>
-        </div>
+          {/* Quantity */}
+          <div className="flex items-center gap-1">
+            <button
+              onClick={() => decreaseQty(item.itemId)}
+              className="bg-gray-300 px-3 py-1"
+            >
+              -
+            </button>
 
-        <div className="flex justify-between">
-          <span>CGST (2.5%)</span>
-          <span>₹{CGST.toFixed(2)}</span>
-        </div>
-        <div className="flex justify-between">
-          <span>SGST (2.5%)</span>
-          <span>₹{SGST.toFixed(2)}</span>
-        </div>
+            <input
+             type="number"
+             value={item.qty}
+              min="0"
+              step="0.5"
+              onChange={(e) =>
+                updateQty(item.itemId, e.target.value)
+              }
+              className="w-12 text-center border rounded appearance-none"
+            />
 
-        <div className="flex justify-between font-bold text-lg">
-          <span>Total</span>
-          <span>₹{grandTotal.toFixed(2)}</span>
-        </div>
+            <button
+              onClick={() => increaseQty(item.itemId)}
+              className="bg-gray-300 px-3 py-1"
+            >
+              +
+            </button>
+          </div>
 
-        <button onClick={handlePrintBill} className="bg-green-500 text-white w-full py-2 rounded-lg mt-2">
-          Print Bill
-        </button>
-      </div>
+          {/* Remove Button */}
+          <button
+            onClick={() => removeItem(item.itemId)}
+            className="text-red-500 text-sm cursor-pointer"
+          >
+            ✕
+          </button>
+        </div>
+      ))}
     </div>
-  );
+
+    {/* TOTAL SECTION */}
+    <div className="border-t pt-2 space-y-1">
+      <div className="flex justify-between">
+        <span>Subtotal</span>
+        <span>₹{subtotal.toFixed(2)}</span>
+      </div>
+
+      <div className="flex justify-between">
+        <span>CGST (2.5%)</span>
+        <span>₹{CGST.toFixed(2)}</span>
+      </div>
+
+      <div className="flex justify-between">
+        <span>SGST (2.5%)</span>
+        <span>₹{SGST.toFixed(2)}</span>
+      </div>
+
+      <div className="flex justify-between font-bold text-lg">
+        <span>Total</span>
+        <span>₹{grandTotal.toFixed(2)}</span>
+      </div>
+
+      <button
+        onClick={handlePrintBill}
+        className="bg-green-500 text-white w-full py-2 rounded mt-2"
+      >
+        Print Bill
+      </button>
+    </div>
+  </div>
+);
 }
 
 export default BillPanel;

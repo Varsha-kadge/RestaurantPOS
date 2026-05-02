@@ -6,10 +6,10 @@ import Layout from "./pages/Layout"
 import LoginPage from "./pages/Login"
 
 function App() {
-  const [selectedCategory, setSelectedCategory] = useState("All");
-  const [searchTerm, setSearchTerm] = useState("");
-  const [products, setItems] = useState([]);
-  const [restoInfo, setRestoInfo] = useState([]);
+const [selectedCategory, setSelectedCategory] = useState("All");
+const [searchTerm, setSearchTerm] = useState("");
+const [products, setItems] = useState([]);
+const [restoInfo, setRestoInfo] = useState([]);
 const [selectedStoreID, setSlectedStoreID] = useState("");
 
 

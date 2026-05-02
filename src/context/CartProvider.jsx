@@ -38,16 +38,53 @@ function CartProvider({ children }) {
         .filter((item) => item.qty > 0)
     );
   };
-  const updateQty = (id, qty) => {
-  if (qty < 1) return;
+ const updateQty = (id, qty) => {
+  // ✅ allow empty input
+  if (qty === "") {
+    setCart((prev) =>
+      prev.map((item) =>
+        item.itemId === id ? { ...item, qty: "" } : item
+      )
+    );
+    return;
+  }
+
+  const parsedQty = parseFloat(qty);
+
+  if (isNaN(parsedQty)) return;
 
   setCart((prev) =>
     prev.map((item) =>
       item.itemId === id
-        ? { ...item, qty: Number(qty) }
+        ? { ...item, qty: parsedQty }
         : item
     )
   );
+};
+const updatePrice = (id, price) => {
+  if (price === "") {
+    setCart((prev) =>
+      prev.map((item) =>
+        item.itemId === id ? { ...item, price: "" } : item
+      )
+    );
+    return;
+  }
+
+  const parsedPrice = parseFloat(price);
+
+  if (isNaN(parsedPrice)) return;
+
+  setCart((prev) =>
+    prev.map((item) =>
+      item.itemId === id
+        ? { ...item, price: parsedPrice }
+        : item
+    )
+  );
+};
+const removeItem = (id) => {
+  setCart(cart.filter(item => item.itemId !== id));
 };
   const clearCart = () => {
   setCart([]);
@@ -58,7 +95,9 @@ function CartProvider({ children }) {
         increaseQty,
         decreaseQty,
         clearCart,
-        updateQty }}>
+        updateQty,
+        updatePrice,
+        removeItem }}>
       {children}
     </CartContext.Provider>
   );
