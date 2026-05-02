@@ -62,7 +62,8 @@ export default function AddItem({ menuItems, restoInfo }) {
           <input
             type="number"
             min="1"
-            value={qty[item.itemId] || 1}
+            placeholder="1"
+            value={qty[item.itemId]}
             onChange={(e) =>
               handleQtyChange(item.itemId, e.target.value)
             }
