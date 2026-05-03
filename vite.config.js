@@ -5,6 +5,6 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
-    allowedHosts: ['https://bryce-unseducible-zaida.ngrok-free.dev']
+    //allowedHosts: ['https://bryce-unseducible-zaida.ngrok-free.dev']
   }
 });

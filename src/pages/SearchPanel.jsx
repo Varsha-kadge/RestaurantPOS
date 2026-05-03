@@ -52,20 +52,20 @@ export default function AddItem({ menuItems, restoInfo }) {
         >
           <span>{item.item}</span>
 
-          <input
-            type="number"
-            min="1"
-            placeholder="1"
-            value={qty[item.itemId] || ""}
-            onChange={(e) =>handleQtyChange(item.itemId, e.target.value)}
-             onKeyDown={(e) => {
+        <input
+  type="number"
+  min="1"
+  placeholder="1"
+  value={qty[item.itemId] || ""}
+  onChange={(e) => handleQtyChange(item.itemId, e.target.value)}
+  onBlur={(e) => handleQtyChange(item.itemId,e.target.value)} // ✅ reliable
+  onKeyDown={(e) => {
     if (e.key === "Enter") {
-      e.preventDefault(); // important for number input
-      handleQtyChange(item.itemId, e.target.value)
+      e.target.blur(); // ✅ forces blur
     }
   }}
-            className="w-12 border rounded text-center"
-          />
+  className="w-12 border rounded text-center"
+/>
 
           <button
             onClick={() => handleAdd(item)}

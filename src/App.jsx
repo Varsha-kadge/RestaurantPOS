@@ -23,7 +23,7 @@ const handleChildData = (data) => {
       if(selectedStoreID){
     try {
       const response = await fetch(
-        "https://bryce-unseducible-zaida.ngrok-free.dev/bo-pos/getItemData?storeId="+selectedStoreID,
+        "http://localhost:6035/bo-pos/getItemData?storeId="+selectedStoreID,
         {
       headers: {
         "ngrok-skip-browser-warning": "true",
@@ -41,7 +41,7 @@ const handleChildData = (data) => {
       if(selectedStoreID){
       try {
         const response = await fetch(
-          "https://bryce-unseducible-zaida.ngrok-free.dev/bo-pos/getRestaurantData?storeId="+selectedStoreID,
+          "http://localhost:6035/bo-pos/getRestaurantData?storeId="+selectedStoreID,
           {
       headers: {
         "ngrok-skip-browser-warning": "true",
