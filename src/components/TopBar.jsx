@@ -54,7 +54,7 @@ const handleLogout = () => {
     {/* Logout */}
     <button
       onClick={handleLogout}
-      className="bg-gray-500 text-white px-3 py-1 rounded-lg whitespace-nowrap"
+      className="bg-gray-500 text-white px-3 py-1 rounded-lg whitespace-nowrap cursor-pointer"
     >
       Logout →
     </button>
@@ -65,7 +65,7 @@ const handleLogout = () => {
 
     <button
       onClick={() => onCatClick("All")}
-      className="bg-gray-500 text-white px-3 py-1 rounded-lg"
+      className="bg-gray-500 text-white px-3 py-1 rounded-lg cursor-pointer"
     >
       All
     </button>
@@ -73,7 +73,7 @@ const handleLogout = () => {
     {categories.map((cat) => (
       <button
         key={cat.categorieId}
-        className="bg-orange-500 text-white px-3 py-1 rounded-lg"
+        className="bg-orange-500 text-white px-3 py-1 rounded-lg cursor-pointer"
         onClick={() => onCatClick(cat)}
       >
         {cat.categoriesName}

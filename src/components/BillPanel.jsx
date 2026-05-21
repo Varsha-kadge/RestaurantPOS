@@ -372,16 +372,26 @@ window.onload = function(){
  return (
   <div className="w-96 h-full mt-2 bg-white p-4 flex flex-col">
     <div className="overflow-y-auto">
-     <div className="flex items-center justify-between mb-4">
-  <h2 className="text-xl font-semibold">
-    {tableId}
-  </h2>
+    <div className="flex items-center justify-between mb-3 px-3 py-2 bg-white border rounded-md">
+  
+  <div className="flex items-center gap-2">
+    <h2 className="text-base font-semibold text-gray-800">
+      {tableId}
+    </h2>
 
-  {selectedTable === tableId && (
-    <div className="bg-green-500 text-white px-2 py-1 text-sm rounded">
-      Active Table
-    </div>
-  )}
+    {selectedTable === tableId && (
+      <span className="bg-green-200 text-green-700 text-md px-2 py-0.5 rounded-full">
+        Active
+      </span>
+    )}
+  </div>
+
+  <button
+    onClick={() => clearCart(tableId)}
+    className="bg-red-500 hover:bg-red-600 text-white text-md px-3 py-1 rounded transition"
+  >
+    Clear Cart
+  </button>
 </div>
       {cart.map((item) => (
         <div
