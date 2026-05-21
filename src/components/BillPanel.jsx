@@ -1,8 +1,20 @@
 import { useCart } from "../context/useCart";
 import { generateBillNumber } from "../Utils/billNumber";
 import { useEffect } from "react";
-function BillPanel({restaurantInfo}) {
-  const { cart, clearCart, increaseQty, decreaseQty, updateQty, updatePrice,removeItem } = useCart();
+function BillPanel({tableId,restaurantInfo}) {
+  const {
+  selectedTable,
+  getCart,
+  increaseQty,
+  decreaseQty,
+  updateQty,
+  updatePrice,
+  removeItem,
+  clearCart,
+  
+} = useCart();
+
+const cart = getCart(tableId);
   const subtotal = cart.reduce(
   (acc, item) => acc + item.price * item.qty,
   0
@@ -242,15 +254,22 @@ window.onload = function(){
     printWindow.print();
 
     // 🔥 Optional: clear cart after printing
-    clearCart();
+    clearCart(tableId);
   };
  return (
   <div className="w-96 h-full mt-2 bg-white p-4 flex flex-col">
     <div className="overflow-y-auto">
-      <h2 className="text-xl font-semibold mb-4">
-        Current Order
-      </h2>
+     <div className="flex items-center justify-between mb-4">
+  <h2 className="text-xl font-semibold">
+    {tableId}
+  </h2>
 
+  {selectedTable === tableId && (
+    <div className="bg-green-500 text-white px-2 py-1 text-sm rounded">
+      Active Table
+    </div>
+  )}
+</div>
       {cart.map((item) => (
         <div
           key={item.itemId}
@@ -268,7 +287,7 @@ window.onload = function(){
               step="0.5"
               min="0"
               onChange={(e) =>
-                updatePrice(item.itemId, e.target.value)
+                updatePrice(tableId, item.itemId, e.target.value)
               }
               className="w-16 px-1 border rounded appearance-none"
             />
@@ -277,7 +296,7 @@ window.onload = function(){
           {/* Quantity */}
           <div className="flex items-center gap-1">
             <button
-              onClick={() => decreaseQty(item.itemId)}
+              onClick={() => decreaseQty(tableId,item.itemId)}
               className="bg-gray-300 px-3 py-1"
             >
               -
@@ -289,13 +308,13 @@ window.onload = function(){
               min="0"
               step="0.5"
               onChange={(e) =>
-                updateQty(item.itemId, e.target.value)
+                updateQty(tableId, item.itemId, e.target.value)
               }
               className="w-12 text-center border rounded appearance-none"
             />
 
             <button
-              onClick={() => increaseQty(item.itemId)}
+              onClick={() => increaseQty(tableId, item.itemId)}
               className="bg-gray-300 px-3 py-1"
             >
               +
@@ -304,7 +323,7 @@ window.onload = function(){
 
           {/* Remove Button */}
           <button
-            onClick={() => removeItem(item.itemId)}
+            onClick={() => removeItem(tableId, item.itemId)}
             className="text-red-500 text-sm cursor-pointer"
           >
             ✕
@@ -337,7 +356,7 @@ window.onload = function(){
 
       <button
         onClick={handlePrintBill}
-        className="bg-green-500 text-white w-full py-2 rounded mt-2"
+        className="bg-green-600 text-white w-full py-2 rounded mt-2 cursor-pointer"
       >
         Print Bill
       </button>

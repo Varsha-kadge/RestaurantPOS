@@ -1,5 +1,5 @@
 import { useEffect, useState} from "react";
-import logo from '../assets/logo.jpeg'
+import logo from '../../public/images/logo.jpeg'
 import SearchPanel from "../pages/SearchPanel"
 
 export default function Topbar({ onCatClick, searchTerm, setSearchTerm,selectedStoreID,setSlectedStoreID,products,restoInfo}) {
@@ -9,7 +9,8 @@ export default function Topbar({ onCatClick, searchTerm, setSearchTerm,selectedS
   const fetchItems = async () => {
     try {
       const response = await fetch(
-        "http://localhost:6035/bo-pos/getCategoryData?storeId="+selectedStoreID,
+      "https://bryce-unseducible-zaida.ngrok-free.dev/bo-pos/getCategoryData?storeId="+selectedStoreID,
+
         {
       headers: {
         "ngrok-skip-browser-warning": "true",

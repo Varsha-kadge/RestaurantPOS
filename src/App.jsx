@@ -1,9 +1,9 @@
 import { useState , useEffect} from "react";
 import { Routes, Route } from "react-router-dom";
 import BillingPage from "./pages/BillingPage";
-import SearchPanel from "./pages/SearchPanel"
 import Layout from "./pages/Layout"
 import LoginPage from "./pages/Login"
+import BillPanelGrid from "./components/BillPanelGrid"
 
 function App() {
 const [selectedCategory, setSelectedCategory] = useState("All");
@@ -23,7 +23,8 @@ const handleChildData = (data) => {
       if(selectedStoreID){
     try {
       const response = await fetch(
-        "http://localhost:6035/bo-pos/getItemData?storeId="+selectedStoreID,
+      "https://bryce-unseducible-zaida.ngrok-free.dev/bo-pos/getItemData?storeId="+selectedStoreID,
+
         {
       headers: {
         "ngrok-skip-browser-warning": "true",
@@ -41,7 +42,7 @@ const handleChildData = (data) => {
       if(selectedStoreID){
       try {
         const response = await fetch(
-          "http://localhost:6035/bo-pos/getRestaurantData?storeId="+selectedStoreID,
+        "https://bryce-unseducible-zaida.ngrok-free.dev/bo-pos/getRestaurantData?storeId="+selectedStoreID,
           {
       headers: {
         "ngrok-skip-browser-warning": "true",
@@ -99,6 +100,11 @@ const handleChildData = (data) => {
 
       <Route
         path="add-item"
+        element={
+          <BillPanelGrid
+          restoInfo={restoInfo}
+          />
+        }
       />
     </Route>
   )}

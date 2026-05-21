@@ -2,102 +2,156 @@ import { useState } from "react";
 import CartContext from "./CartContext";
 
 function CartProvider({ children }) {
-  const [cart, setCart] = useState([]);
+  // ✅ multiple tables instead of single cart
+  const [tables, setTables] = useState({
+  "Table 1": [],
+  "Table 2": [],
+  "Table 3": [],
+  "Table 4": [],
+  "Table 5": [],
+});
 
-  const addToCart = (product) => {
-    setCart((prev) => {
-      const existing = prev.find(
+const [selectedTable, setSelectedTable] =
+  useState("Table 1");
+
+  // ✅ helper to get cart
+  const getCart = (tableId) => tables[tableId] || [];
+
+  // ✅ ADD ITEM
+  const addToCart = (tableId, product) => {
+    setTables((prev) => {
+      const cart = prev[tableId] || [];
+      const existing = cart.find(
         (item) => item.itemId === product.itemId
       );
-     const qtyToAdd = product.qty ? Number(product.qty) : 1;
+
+      const qtyToAdd = product.qty ? Number(product.qty) : 1;
+
+      let updatedCart;
+
       if (existing) {
-        return prev.map((item) =>
-          item.itemId === product.itemId ? { ...item, qty: item.qty + 1 } : item
+        updatedCart = cart.map((item) =>
+          item.itemId === product.itemId
+            ? { ...item, qty: item.qty + qtyToAdd }
+            : item
         );
+      } else {
+        updatedCart = [...cart, { ...product, qty: qtyToAdd }];
       }
-      return [...prev, { ...product, qty: qtyToAdd }];
+
+      return { ...prev, [tableId]: updatedCart };
     });
   };
-   const increaseQty = (id) => {
-    setCart((prev) =>
-      prev.map((item) =>
+
+  // ✅ INCREASE
+  const increaseQty = (tableId, id) => {
+    setTables((prev) => ({
+      ...prev,
+      [tableId]: prev[tableId].map((item) =>
         item.itemId === id
           ? { ...item, qty: item.qty + 1 }
           : item
       )
-    );
+    }));
   };
-  const decreaseQty = (id) => {
-    setCart((prev) =>
-      prev
+
+  // ✅ DECREASE
+  const decreaseQty = (tableId, id) => {
+    setTables((prev) => ({
+      ...prev,
+      [tableId]: prev[tableId]
         .map((item) =>
           item.itemId === id
             ? { ...item, qty: item.qty - 1 }
             : item
         )
         .filter((item) => item.qty > 0)
-    );
+    }));
   };
- const updateQty = (id, qty) => {
-  // ✅ allow empty input
-  if (qty === "") {
-    setCart((prev) =>
-      prev.map((item) =>
-        item.itemId === id ? { ...item, qty: "" } : item
+
+  // ✅ UPDATE QTY
+  const updateQty = (tableId, id, qty) => {
+    if (qty === "") {
+      setTables((prev) => ({
+        ...prev,
+        [tableId]: prev[tableId].map((item) =>
+          item.itemId === id ? { ...item, qty: "" } : item
+        )
+      }));
+      return;
+    }
+
+    const parsedQty = parseFloat(qty);
+    if (isNaN(parsedQty)) return;
+
+    setTables((prev) => ({
+      ...prev,
+      [tableId]: prev[tableId].map((item) =>
+        item.itemId === id
+          ? { ...item, qty: parsedQty }
+          : item
       )
-    );
-    return;
-  }
+    }));
+  };
 
-  const parsedQty = parseFloat(qty);
+  // ✅ UPDATE PRICE
+  const updatePrice = (tableId, id, price) => {
+    if (price === "") {
+      setTables((prev) => ({
+        ...prev,
+        [tableId]: prev[tableId].map((item) =>
+          item.itemId === id ? { ...item, price: "" } : item
+        )
+      }));
+      return;
+    }
 
-  if (isNaN(parsedQty)) return;
+    const parsedPrice = parseFloat(price);
+    if (isNaN(parsedPrice)) return;
 
-  setCart((prev) =>
-    prev.map((item) =>
-      item.itemId === id
-        ? { ...item, qty: parsedQty }
-        : item
-    )
-  );
-};
-const updatePrice = (id, price) => {
-  if (price === "") {
-    setCart((prev) =>
-      prev.map((item) =>
-        item.itemId === id ? { ...item, price: "" } : item
+    setTables((prev) => ({
+      ...prev,
+      [tableId]: prev[tableId].map((item) =>
+        item.itemId === id
+          ? { ...item, price: parsedPrice }
+          : item
       )
-    );
-    return;
-  }
+    }));
+  };
 
-  const parsedPrice = parseFloat(price);
+  // ✅ REMOVE ITEM
+  const removeItem = (tableId, id) => {
+    setTables((prev) => ({
+      ...prev,
+      [tableId]: prev[tableId].filter(
+        (item) => item.itemId !== id
+      )
+    }));
+  };
 
-  if (isNaN(parsedPrice)) return;
+  // ✅ CLEAR CART (per table)
+  const clearCart = (tableId) => {
+    setTables((prev) => ({
+      ...prev,
+      [tableId]: []
+    }));
+  };
 
-  setCart((prev) =>
-    prev.map((item) =>
-      item.itemId === id
-        ? { ...item, price: parsedPrice }
-        : item
-    )
-  );
-};
-const removeItem = (id) => {
-  setCart(cart.filter(item => item.itemId !== id));
-};
-  const clearCart = () => {
-  setCart([]);
-};
   return (
-    <CartContext.Provider value={{ cart,
+    <CartContext.Provider
+      value={{
+        selectedTable,
+        setSelectedTable,
+        getCart,
         addToCart,
         increaseQty,
         decreaseQty,
-        clearCart,
         updateQty,
         updatePrice,
-        removeItem }}>
+        removeItem,
+        clearCart
+      }}
+    >
       {children}
     </CartContext.Provider>
   );

@@ -1,10 +1,12 @@
 
 import { useCart } from "../context/useCart";
+import itemImages from "../Utils/itemImages";
+import defaultImg from "../../public/images/Default_food.jpg"
 
 //import { products } from "../data/products";
 
 function ProductGrid({ products }) {
-    const { addToCart } = useCart();
+    const { addToCart,selectedTable } = useCart();
     //const filteredProducts =
     //selectedCategory === "All" ? products : products.filter((product) => product.category === selectedCategory);
   if (products.length !== 0) {
@@ -15,13 +17,15 @@ function ProductGrid({ products }) {
       <div
           key={product.itemId}
               className="bg-white rounded-xl shadow hover:shadow-lg transition p-2 cursor-pointer"
-              onClick={() => addToCart(product)}
+              onClick={() => addToCart(selectedTable ,product)}
         >
-          {/* <img
-            src={product.image}
+          <img
+          src={
+        itemImages[product.itemId] || defaultImg}
+
             alt={product.item}
             className="rounded-xl h-30 w-full object-cover"
-          /> */}
+          />
           <h3 className="mt-3 font-semibold">{product.item}</h3>
           <p className="text-orange-500 font-bold">₹{product.price}</p>
         </div>

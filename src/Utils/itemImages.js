@@ -1,0 +1,72 @@
+const itemImages = {
+  1:"../../public/images/Bisleri_Mineral_Water.jpg",
+  2: "../../public/images/Lime_Water.jpg",
+  3: "../../public/images/Lime_Soda.jpg",
+  4: "../../public/images/Cold_Coffe.jpg",
+  5:"../../public/images/Sweet_Lassi.jpg",
+  6:"../../public/images/Chass.jpg",
+  7:"../../public/images/Chai.jpg",
+  8:"../../public/images/Kulhar.jpg",
+  9:"../../public/images/Chai.jpg",
+  10:"../../public/images/Green_Tea.jpg",
+  11:"../../public/images/Lemon_Tea.jpg",
+  12:"../../public/images/Black_Tea.webp",
+  13:"../../public/images/Jal_Jeera.jpg",
+  14:"../../public/images/Cold_Drink.jpg",
+  15:"../../public/images/Cappuccino.jpg",
+  16:"../../public/images/Masala_Chai.jpg",
+  17:"../../public/images/HotMilk.jpg",
+  18:"../../public/images/Roohafza_Milk.jpg",
+  19:"../../public/images/Manchow_Soup.jpg",
+
+  21:"../../public/images/Veg_Soup.jpg",
+
+  23:"../../public/images/MashrunSoup.jpg",
+
+  25:"../../public/images/Rice.webp",
+
+  
+  26:"../../public/images/Jeera_Rice.jpg",
+  27:"../../public/images/Veg_Pulao.jpg",
+  28:"../../public/images/Peas_Pulao.jpg",
+  30:"../../public/images/Veg_Biryani.jpg",
+  31:"../../public/images/Fried_Rice.jpg",
+
+  33:"../../public/images/Dal.jpg",
+  34:"../../public/images/Dal_Butter.jpg",
+  35:"../../public/images/Methi_Matar_Malai.jpg",
+  36:"../../public/images/Kadai_Mashroom.jpg",
+  37:"../../public/images/Methi_Malai_Paneer.jpg",
+  38:"../../public/images/Dahi_Tadka.jpg",
+  39:"../../public/images/Kaju_Masala.jpg",
+  40:"../../public/images/Paneer_Pasanda.webp",
+  41:"../../public/images/Palak_Kofta.jpg",
+  42:"../../public/images/Dal_Maharani.jpg",
+  43:"../../public/images/Sahhi_Dal_Maharani.jpg",
+
+  45:"../../public/images/Chana_Masala.jpg",
+  47:"../../public/images/Sev_Tamater.jpg",
+
+  82:"../../public/images/Masala_Papad.jpg",
+  83:"../../public/images/Curd.jpg",
+  84:"../../public/images/Veg_Raita.jpg",
+  85:"../../public/images/Aloo_Raita.jpg",
+  86:"../../public/images/Boondi_Raita.jpg",
+  87:"../../public/images/Pineapple_Raita.jpg",
+  89:"../../public/images/Hakka_Noodles.jpg",
+  102:"../../public/images/Paneer_Chilli.jpg",
+  108:"../../public/images/Veg_Manchurian.jpg",
+
+  122:"../../public/images/gulab_jamun.jpg",
+  129:"../../public/images/Butter_Naan.jpg",
+  125:"../../public/images/Missi_Roti.jpg",
+  124:"../../public/images/Butter_Rotti.jpg",
+  130:"../../public/images/Garlic_Naan.jpg",
+  134:"../../public/images/Chur_Chur_Naan.jpg",
+  135:"../../public/images/Laccha_Paratha.jpg",
+  170:"../../public/images/Shahi_Paneer.jpg",
+  171:"../../public/images/Dal_Tadka.jpg",
+
+};
+
+export default itemImages;

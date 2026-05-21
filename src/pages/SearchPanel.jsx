@@ -5,7 +5,7 @@ export default function AddItem({ menuItems, restoInfo }) {
 
   const [search, setSearch] = useState("");
   const [qty, setQty] = useState({});
-  const { addToCart } = useCart();
+  const { addToCart, selectedTable} = useCart();
   const filteredItems = menuItems.filter(item =>
     item.item.toLowerCase().includes(search.toLowerCase())
   );
@@ -17,8 +17,7 @@ export default function AddItem({ menuItems, restoInfo }) {
   const handleAdd = (item) => {
   
     const quantity = qty[item.itemId] || 1;
-
-    addToCart({
+    let product = {
       storeId:item.storeId,
       categorieId:item.categorieId,
       itemId:item.itemId,
@@ -26,7 +25,9 @@ export default function AddItem({ menuItems, restoInfo }) {
       price: item.price,
       gst:item.gst,
       qty: Number(quantity)
-    });
+    }
+
+    addToCart(selectedTable, product);
 
     setSearch("");
   };

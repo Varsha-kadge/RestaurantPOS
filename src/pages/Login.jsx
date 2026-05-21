@@ -1,5 +1,5 @@
 import { useState } from "react";
-import logo from '../assets/logo.jpeg'
+import logo from '../../public/images/logo.jpeg'
 
 export default function Login({ sendData }) {
     const [selectedID, setSlectedID] = useState(null);
