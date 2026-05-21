@@ -94,7 +94,7 @@ body{
   margin:0;
   padding:4px;
   font-family: monospace;
-  font-size:14px;
+  font-size:16px;
 }
 
 .center{
@@ -113,7 +113,7 @@ table{
 
 th, td{
   padding:2px 0;
-  font-size:13px;
+  font-size:15px;
 }
 
 th{
@@ -127,7 +127,7 @@ th{
 
 .total{
   font-weight:bold;
-  font-size:15px;
+  font-size:17px;
 }
 
 .item{
@@ -147,10 +147,10 @@ th{
 }
 
 .small{
-  font-size:12px;
+  font-size:14px;
 }
 strong{
-font-size:18px;
+font-size:20px;
 }
 </style>
 </head>
@@ -282,7 +282,7 @@ body{
   width:72mm;
   padding:5px;
   font-family: monospace;
-  font-size:14px;
+  font-size:18px;
 }
 
 .center{
@@ -297,11 +297,14 @@ body{
 table{
   width:100%;
   border-collapse:collapse;
+  margin-left:0;
 }
 
 th, td{
   padding:4px 0;
-  font-size:14px;
+  font-size:16px;
+  padding:2px 0;
+  text-align:left;
 }
 
 th{
@@ -313,7 +316,7 @@ th{
 }
 
 strong{
-  font-size:18px;
+  font-size:20px;
 }
 </style>
 </head>
