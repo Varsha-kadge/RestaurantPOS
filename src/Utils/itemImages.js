@@ -46,6 +46,7 @@ const itemImages = {
 
   45:"../../public/images/Chana_Masala.jpg",
   47:"../../public/images/Sev_Tamater.jpg",
+  172:"../../public/images/Sev_Tamater.jpg",
 
   82:"../../public/images/Masala_Papad.jpg",
   83:"../../public/images/Curd.jpg",
@@ -66,6 +67,21 @@ const itemImages = {
   135:"../../public/images/Laccha_Paratha.jpg",
   170:"../../public/images/Shahi_Paneer.jpg",
   171:"../../public/images/Dal_Tadka.jpg",
+  173:"../../public/images/Butter_Rotti.jpg",
+  174:"../../public/images/Tandoori_Roti.jpg",
+  175:"../../public/images/Veg_Raita.jpg",
+  176:"../../public/images/Boondi_Raita.jpg",
+  178:"../../public/images/Chai.jpg",
+  179:"../../public/images/Bisleri_Mineral_Water.jpg",
+  180:"../../public/images/Thali.jpg",
+  181:"../../public/images/Green_Salad.webp",
+  182:"../../public/images/Sweets.jpg",
+  183:"../../public/images/Missi_Roti.jpg",
+  184:"../../public/images/Pineapple_Raita.jpg",
+  177:"../../public/images/Matar_Paneer.jpg",
+  185:"../../public/images/Curd.jpg",
+  186:"../../public/images/Dal_Maharani.jpg",
+  187:"../../public/images/Butter_Naan.jpg",
 
 };
 

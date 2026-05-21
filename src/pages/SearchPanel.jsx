@@ -40,7 +40,7 @@ export default function AddItem({ menuItems, restoInfo }) {
     placeholder="Search item..."
     value={search}
     onChange={(e) => setSearch(e.target.value)}
-    className="border rounded-lg px-4 py-2 w-full"
+    className="border rounded-lg px-4 py-2 w-lg"
   />
 
   {search && (
