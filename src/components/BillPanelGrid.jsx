@@ -62,6 +62,72 @@ return(
     />
   </div>
 
+  <div
+    onClick={() => setSelectedTable("Table 6")}
+    className={`border-2 rounded cursor-pointer ${
+      selectedTable === "Table 6"
+        ? "border-green-500"
+        : "border-gray-300"
+    }`}
+  >
+    <BillPanel
+      tableId="Table 6"
+      restaurantInfo={restoInfo}
+    />
+  </div>
+  <div
+    onClick={() => setSelectedTable("Table 7")}
+    className={`border-2 rounded cursor-pointer ${
+      selectedTable === "Table 7"
+        ? "border-green-500"
+        : "border-gray-300"
+    }`}
+  >
+    <BillPanel
+      tableId="Table 7"
+      restaurantInfo={restoInfo}
+    />
+  </div>
+  <div
+    onClick={() => setSelectedTable("Table 8")}
+    className={`border-2 rounded cursor-pointer ${
+      selectedTable === "Table 8"
+        ? "border-green-500"
+        : "border-gray-300"
+    }`}
+  >
+    <BillPanel
+      tableId="Table 8"
+      restaurantInfo={restoInfo}
+    />
+  </div>
+  <div
+    onClick={() => setSelectedTable("Table 9")}
+    className={`border-2 rounded cursor-pointer ${
+      selectedTable === "Table 9"
+        ? "border-green-500"
+        : "border-gray-300"
+    }`}
+  >
+    <BillPanel
+      tableId="Table 9"
+      restaurantInfo={restoInfo}
+    />
+  </div>
+  <div
+    onClick={() => setSelectedTable("Table 10")}
+    className={`border-2 rounded cursor-pointer ${
+      selectedTable === "Table 10"
+        ? "border-green-500"
+        : "border-gray-300"
+    }`}
+  >
+    <BillPanel
+      tableId="Table 10"
+      restaurantInfo={restoInfo}
+    />
+  </div>
+
 </div>
 )
 }

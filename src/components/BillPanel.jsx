@@ -256,6 +256,119 @@ window.onload = function(){
     // 🔥 Optional: clear cart after printing
     clearCart(tableId);
   };
+  const handlePrintKOT = () => {
+  if (cart.length === 0) return;
+
+  const dateTime = new Date().toLocaleString();
+
+  const printWindow = window.open(
+    "",
+    "",
+    "width=300,height=500"
+  );
+
+  printWindow.document.write(`
+<html>
+<head>
+<title>KOT - ${tableId}</title>
+
+<style>
+@page{
+  size:72mm auto;
+  margin:0;
+}
+
+body{
+  width:72mm;
+  padding:5px;
+  font-family: monospace;
+  font-size:14px;
+}
+
+.center{
+  text-align:center;
+}
+
+.line{
+  border-top:1px dashed #000;
+  margin:6px 0;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+th, td{
+  padding:4px 0;
+  font-size:14px;
+}
+
+th{
+  border-bottom:1px dashed #000;
+}
+
+.right{
+  text-align:right;
+}
+
+strong{
+  font-size:18px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="center">
+  <strong>KOT</strong><br/>
+  ${tableId}<br/>
+  ${dateTime}
+</div>
+
+<div class="line"></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th class="right">Qty</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    ${cart
+      .map(
+        (item) => `
+      <tr>
+        <td>${item.item}</td>
+        <td class="right">${item.qty}</td>
+      </tr>
+    `
+      )
+      .join("")}
+  </tbody>
+</table>
+
+<div class="line"></div>
+
+<div class="center">
+  Kitchen Order Ticket
+</div>
+
+<script>
+window.onload = function(){
+  window.print();
+  window.close();
+}
+</script>
+
+</body>
+</html>
+`);
+
+  printWindow.document.close();
+};
  return (
   <div className="w-96 h-full mt-2 bg-white p-4 flex flex-col">
     <div className="overflow-y-auto">
@@ -353,13 +466,21 @@ window.onload = function(){
         <span>Total</span>
         <span>₹{grandTotal.toFixed(2)}</span>
       </div>
+    <div className="w-full flex gap-2 mt-2">
+  <button
+    onClick={handlePrintBill}
+    className="bg-green-600 text-white w-60 py-2 rounded cursor-pointer"
+  >
+    Print Bill
+  </button>
 
-      <button
-        onClick={handlePrintBill}
-        className="bg-green-600 text-white w-full py-2 rounded mt-2 cursor-pointer"
-      >
-        Print Bill
-      </button>
+  <button
+    onClick={handlePrintKOT}
+    className="bg-blue-600 text-white w-40 py-2 rounded cursor-pointer"
+  >
+    KOT
+  </button>
+</div>
     </div>
   </div>
 );
