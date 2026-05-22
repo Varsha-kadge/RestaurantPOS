@@ -85,16 +85,22 @@ const grandTotal = subtotal + CGST + SGST;
 <style>
 
 @page{
-  size:72mm auto;
+  size:80mm auto;
   margin:0;
 }
 
-body{
-  width:72mm;
-  margin:0;
-  padding:4px;
+html, body{
+  width:76mm;
+  margin:0 !important;
+  padding:0 !important;
   font-family: monospace;
   font-size:16px;
+}
+
+body{
+  padding-left:2px;
+  padding-right:2px;
+  box-sizing:border-box;
 }
 
 .center{
@@ -107,8 +113,8 @@ body{
 
 table{
   width:100%;
-  margin-left:2px;
   border-collapse:collapse;
+  margin:0;
 }
 
 th, td{
@@ -118,6 +124,7 @@ th, td{
 
 th{
   border-bottom:1px dashed #000;
+  text-align:left;
 }
 
 .line{
@@ -149,8 +156,9 @@ th{
 .small{
   font-size:14px;
 }
+
 strong{
-font-size:20px;
+  font-size:20px;
 }
 </style>
 </head>
@@ -274,49 +282,52 @@ window.onload = function(){
 
 <style>
 @page{
-  size:72mm auto;
-  margin:0;
+  size: 72mm auto;
+  margin: 0;
+}
+
+html, body{
+  width: 72mm;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-family: monospace;
+  font-size: 17px;
 }
 
 body{
-  width:72mm;
-  padding:5px;
-  font-family: monospace;
-  font-size:18px;
+  padding-left: 2px !important;
 }
 
 .center{
-  text-align:center;
+  text-align: center;
 }
 
 .line{
-  border-top:1px dashed #000;
-  margin:6px 0;
+  border-top: 1px dashed #000;
+  margin: 4px 0;
 }
 
 table{
-  width:100%;
-  border-collapse:collapse;
-  margin-left:0;
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0;
 }
 
 th, td{
-  padding:4px 0;
-  font-size:16px;
-  padding:2px 0;
-  text-align:left;
+  padding: 2px 0;
+  font-size: 17px;
 }
 
 th{
-  border-bottom:1px dashed #000;
+  text-align: left;
 }
 
 .right{
-  text-align:right;
+  text-align: right;
 }
 
 strong{
-  font-size:20px;
+  font-size: 20px;
 }
 </style>
 </head>
